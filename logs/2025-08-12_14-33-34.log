@@ -1,0 +1,7 @@
+[2025-08-12 14:33:36] INFO - root - Initiate the data ingestion
+[2025-08-12 14:33:42] INFO - root - Performed train test split on the dataframe
+[2025-08-12 14:33:42] INFO - root - Exited split_data_as_train_test method of Data_Ingestion class
+[2025-08-12 14:33:42] INFO - root - Exporting train and test file path.
+[2025-08-12 14:33:42] INFO - root - Exported train and test file path.
+[2025-08-12 14:33:42] INFO - root - Data Initiation Completed
+[2025-08-12 14:33:42] ERROR - networksecurity_logger - Error occurred in python script name [C:\Users\rajap\OneDrive\Desktop\powerfull projects\networksecurity\main.py] line number [25] error message [module 'networksecurity.constant.training_pipeline' has no attribute 'DATA_VALIDATION_DIR_NAME']
