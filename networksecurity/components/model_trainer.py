@@ -26,6 +26,11 @@ from sklearn.ensemble import (
 import mlflow
 from urllib.parse import urlparse
 
+import dagshub
+dagshub.init(repo_owner='sumansatyaranjanpanda', repo_name='networksecurity', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/sumansatyaranjanpanda/networksecurity.mlflow")
+mlflow.set_experiment("Model-Training")
+
 
 
 
@@ -41,7 +46,7 @@ class ModelTrainer:
             raise NetworkSecurityException(e,sys)
         
     def track_mlflow(self,best_model,classificationmetric):
-        ##mlflow.set_registry_uri("https://dagshub.com/krishnaik06/networksecurity.mlflow")
+
         ##tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         with mlflow.start_run():
             f1_score=classificationmetric.f1_score
@@ -53,7 +58,10 @@ class ModelTrainer:
             mlflow.log_metric("f1_score",f1_score)
             mlflow.log_metric("precision",precision_score)
             mlflow.log_metric("recall_score",recall_score)
-            mlflow.sklearn.log_model(best_model,"model")
+            import joblib
+            joblib.dump(best_model, "best_model.pkl")
+            mlflow.log_artifact("best_model.pkl")
+
             # Model registry does not work with file store
            
         
