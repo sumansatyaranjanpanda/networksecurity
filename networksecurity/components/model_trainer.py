@@ -27,9 +27,19 @@ import mlflow
 from urllib.parse import urlparse
 
 import dagshub
-dagshub.init(repo_owner='sumansatyaranjanpanda', repo_name='networksecurity', mlflow=True)
-mlflow.set_tracking_uri("https://dagshub.com/sumansatyaranjanpanda/networksecurity.mlflow")
-mlflow.set_experiment("Model-Training")
+import os
+
+if os.getenv("ENV") != "prod":  
+    # Local dev / training → init dagshub
+    dagshub.init(
+        repo_owner='sumansatyaranjanpanda',
+        repo_name='networksecurity',
+        mlflow=True
+    )
+else:
+    # On server → use direct tracking URI
+    mlflow.set_tracking_uri("https://dagshub.com/sumansatyaranjanpanda/networksecurity.mlflow")
+    mlflow.set_experiment("Model-Training")
 
 
 
